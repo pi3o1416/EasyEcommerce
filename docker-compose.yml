@@ -1,0 +1,42 @@
+version: '3'
+services:
+  ecommerce_db:
+    image: postgres:14.5
+    container_name: ecommerce_db
+    restart: unless-stopped
+    env_file:
+      - dev.env
+    ports:
+      - '5430:5432'
+    volumes:
+      - /home/docker-storage/postgresql:/var/lib/postgresql/data
+  ecommerce_pg_admin:
+    image: dpage/pgadmin4
+    container_name: ecommerce_pg_admin
+    restart: unless-stopped
+    env_file:
+      - dev.env
+    ports:
+      - '5480:80'
+    volumes:
+      - /home/docker-storage/pgadmin:/var/lib/pgadmin
+  ecommerce_web:
+    container_name: ecommerce_web
+    build:
+      context: .
+      dockerfile: DockerFile
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    restart: unless-stopped
+    env_file:
+      - dev.env
+    ports:
+      - '8000:8000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    depends_on: 
+      - ecommerce_db
+    links:
+      - ecommerce_db
+
