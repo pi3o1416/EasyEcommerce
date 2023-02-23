@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     #Local apps
     'authentication.apps.AuthenticationConfig',
+    'banner.apps.BannerConfig',
 
 ]
 
