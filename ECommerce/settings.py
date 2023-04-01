@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #Third party apps
+    # Third party apps
 
-    #Local apps
+    # Local apps
     'authentication.apps.AuthenticationConfig',
     'banner.apps.BannerConfig',
 
@@ -129,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -136,12 +137,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#Custom Settings
+# Custom Settings
 AUTH_USER_MODEL = 'authentication.User'
-
-
-
-
-
-
-
