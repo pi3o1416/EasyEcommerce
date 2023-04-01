@@ -1,3 +1,8 @@
-from django.contrib import admin
 
-# Register your models here.
+from django.contrib import admin
+from .models import Banner
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Banner._meta.fields]
