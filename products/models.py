@@ -17,7 +17,7 @@ class ProductColor(models.Model):
     )
     color_code = models.CharField(
         verbose_name=_("Color Code"),
-        max_length=6,
+        max_length=7,
         validators=[RegexValidator(
             regex=r'^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$',
             message="Inavlid Color Code"
@@ -71,7 +71,8 @@ class ProductDiscount(models.Model):
         constraints = [
             CheckConstraint(
                 name='valid_discount_range',
-                check=Q(discount_percent__gte=1) & Q(discount_percent__lte=99)
+                check=Q(discount_percent__gte=1) & Q(discount_percent__lte=99),
+                violation_error_message='Discount range should be within 1 to 99 percent'
             )
         ]
 
