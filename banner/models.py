@@ -56,6 +56,15 @@ class Banner(models.Model):
         default=False,
         verbose_name=_("Is Active")
     )
+    created_at = models.DateTimeField(
+        verbose_name=_("Created at"),
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        verbose_name=_("Last updated at"),
+        null=True,
+        blank=True
+    )
     objects = BannerQuerySet.as_manager()
 
     class Meta:
