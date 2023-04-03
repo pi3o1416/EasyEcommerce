@@ -152,3 +152,27 @@ class Product(models.Model):
         related_name='tagged_products',
         verbose_name=_("Product Tag")
     )
+
+
+def product_image_upload_path(image_file):
+    pass
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        to=Product,
+        on_delete=models.CASCADE,
+        related_name='product_images',
+        verbose_name=_("Product")
+    )
+    image = models.ImageField(
+        verbose_name=_("Image"),
+        upload_to=product_image_upload_path
+    )
+    image_code = models.CharField(
+        verbose_name=_("Image code"),
+        max_length=100
+    )
+
+    class Meta:
+        unique_together = ['product', 'image_code']
